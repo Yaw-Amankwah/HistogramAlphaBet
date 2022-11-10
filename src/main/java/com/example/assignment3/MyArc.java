@@ -145,6 +145,7 @@ public class MyArc extends MyShape {
 
         GC.strokeArc(c_X - w/2,c_Y - h/2,w,h,startAngle,extent, arcType);
         GC.fillArc(c_X - w/2,c_Y - h/2,w,h,startAngle,extent, arcType);
+
     }
     @Override
     public String toString() {

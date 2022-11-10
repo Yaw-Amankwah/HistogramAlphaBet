@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment3.Controller">
+   <children>
+      <Button fx:id="btnSubmit" layoutX="227.0" layoutY="223.0" mnemonicParsing="false" onAction="#Submit" prefHeight="74.0" prefWidth="147.0" text="Submit" />
+      <Label fx:id="Welcome" alignment="CENTER" layoutX="9.0" layoutY="14.0" prefHeight="64.0" prefWidth="583.0" text="Welcome!">
+         <font>
+            <Font name="Chalkboard" size="26.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="168.0" layoutY="100.0" prefHeight="58.0" prefWidth="265.0" text="Enter a number N:" textAlignment="CENTER">
+         <font>
+            <Font name="Chalkboard" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textField" layoutX="208.0" layoutY="170.0" prefHeight="46.0" prefWidth="184.0" />
+   </children>
+</AnchorPane>

@@ -1,7 +1,13 @@
 package com.example.assignment3;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -111,7 +117,21 @@ public class HistogramAlphaBet {
             this.rotateAngle = Optional.ofNullable((rotateAngle)).orElse(0.0);
 
             probability = getProbability();
+            if (n > probability.size()) {
+                throw new IllegalArgumentException("n has to be smaller than " + probability.size());
+            }
             slices = getMyPieChart();
+        }
+
+        public MyPoint getCenter() {
+            return center;
+        }
+        public int getRadius() {
+            return radius;
+        }
+
+        public double getRotateAngle() {
+            return rotateAngle;
         }
 
         public Map<Character, Slice> getMyPieChart() {//NEEDS TONS OF WORK
@@ -121,29 +141,48 @@ public class HistogramAlphaBet {
             int colorsSize = colors.length;
 
             double startAngle = rotateAngle;
-            Map<Character, Slice> unsorted = new HashMap<>();
+            Map<Character, Slice> sorted = new LinkedHashMap<>();
             for (Character Key : probability.keySet()) {
                 double angle = 360.0 * probability.get(Key);
-                unsorted.put(Key, new Slice(center, radius, startAngle, angle, colors[rand.nextInt(colorsSize)]));
+                sorted.put(Key, new Slice(center, radius, startAngle, angle, colors[rand.nextInt(colorsSize)]));
                 startAngle += angle;
             }
-            return unsorted;
+            return sorted;
+        }
 
-
+        public Map<Character, Slice> getSlices() {
+            return slices;
         }
 
         public void printOut() {
-
+            System.out.println("char      prob");
+            System.out.println("----      ----");
+            int i = 0;
+            double sum_probabilities = 0;
+            DecimalFormat df = new DecimalFormat("#.##");
+            for (Character Key: slices.keySet()) {
+                if (i < n) {
+                    System.out.println(Key + ":        " + df.format (probability.get(Key)));
+                    sum_probabilities += probability.get(Key);
+                    i++;
+                }
+            }
+            System.out.println("others:   " + df.format(1 - sum_probabilities));
         }
-
-
-
         public void draw (GraphicsContext gc) {
-
-
+            int i = 0;
+            double sum_angles = 0;
+            double end_angle = 0;
+            for (Character Key: slices.keySet()) {
+                if (i < n) {
+                    slices.get(Key).draw(gc);
+                    sum_angles += slices.get(Key).getExtent();
+                    end_angle = slices.get(Key).getEndAngle();
+                    i++;
+                }
+                Slice rest = new Slice(center,radius,end_angle,360 - sum_angles, MyColor.GRAY);
+                rest.draw(gc);
+            }
         }
-
-
     }
-
 }

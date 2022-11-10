@@ -1,7 +1,9 @@
 package com.example.assignment3;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.ArcType;
+import javafx.scene.text.Text;
 
 public class Slice {
    private MyArc slice;
@@ -60,6 +62,6 @@ public class Slice {
                + " extent: " + slice.getExtent();
     }
    public void draw (GraphicsContext gc) {
-      slice.draw(gc);
+       slice.draw(gc);
    }
 }
