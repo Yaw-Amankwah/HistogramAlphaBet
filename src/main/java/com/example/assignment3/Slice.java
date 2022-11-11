@@ -1,9 +1,7 @@
 package com.example.assignment3;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.ArcType;
-import javafx.scene.text.Text;
 
 public class Slice {
    private MyArc slice;

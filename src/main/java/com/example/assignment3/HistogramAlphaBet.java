@@ -1,15 +1,11 @@
 package com.example.assignment3;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
-import java.math.BigDecimal;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class HistogramAlphaBet {
 
@@ -31,8 +27,14 @@ public class HistogramAlphaBet {
     HistogramAlphaBet (String str) { //CREATE OBJECT FROM GIVEN STRING
         setFrequency(createFrequencyMap(str));
         setProbability(createProbabilityMap());
-    }
 
+        //check for accuracy
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        System.out.println("total frequency:" + getTotalFrequency());
+//        System.out.println("total prob: " + getTotalProbability());
+//        frequency.entrySet().forEach(entry -> {System.out.println(entry.getKey() + " " + df.format(entry.getValue()));});
+//        probability.entrySet().forEach(entry -> {System.out.println(entry.getKey() + " " + df.format(entry.getValue()));});
+    }
 
     //GETTERS
     public Map<Character, Integer> getFrequency() {
@@ -58,7 +60,7 @@ public class HistogramAlphaBet {
         return p;
     }
     public Map<Character, Integer> createFrequencyMap(String str) {
-        String r = str.replaceAll("[^a-zA-z]", "").toLowerCase(); // remove all non-alphabet characters
+        String r = str.replaceAll("[^a-zA-Z]", "").toLowerCase(); // remove all non-alphabet characters
         Map<Character, Integer> my_map = new HashMap<>();
 
         for (int i = 0; i < r.length(); i++) { // fill up frequency hashmap
@@ -95,12 +97,27 @@ public class HistogramAlphaBet {
                         .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
         return sortedMap;
     }
-    public static HistogramAlphaBet readFile() {
+    public static HistogramAlphaBet openReadFile(String fileName) {
 
-        return null;
+        String result = new String();
+        Scanner input = null;
+
+        try {
+            input = new Scanner(Paths.get(fileName));
+        }
+        catch (IOException ioException) {
+            System.err.println("File is not found");
+        }
+        try {
+            while (input.hasNext()) {
+                result+=input.nextLine().replaceAll("[^a-zA-Z]","").toLowerCase();
+            }
+            System.out.println(result.length());
+        } catch (NoSuchElementException elementException) {
+            System.err.println("Invalid input! Terminating...");
+        }
+        return new HistogramAlphaBet(result);
     }
-
-
 
     //NON-STATIC INNER CLASS
     public class MyPieChart {
@@ -134,7 +151,7 @@ public class HistogramAlphaBet {
             return rotateAngle;
         }
 
-        public Map<Character, Slice> getMyPieChart() {//NEEDS TONS OF WORK
+        public Map<Character, Slice> getMyPieChart() {
             MyColor [] colors = MyColor.values();
 
             Random rand = new Random();
@@ -167,7 +184,9 @@ public class HistogramAlphaBet {
                     i++;
                 }
             }
-            System.out.println("others:   " + df.format(1 - sum_probabilities));
+            if (n < 26) {
+                System.out.println("others:   " + df.format(1 - sum_probabilities));
+            }
         }
         public void draw (GraphicsContext gc) {
             int i = 0;
@@ -180,7 +199,10 @@ public class HistogramAlphaBet {
                     end_angle = slices.get(Key).getEndAngle();
                     i++;
                 }
-                Slice rest = new Slice(center,radius,end_angle,360 - sum_angles, MyColor.GRAY);
+
+            }
+            if (n < 26) {
+                Slice rest = new Slice(center, radius, end_angle, 360 - sum_angles, MyColor.GRAY);
                 rest.draw(gc);
             }
         }
