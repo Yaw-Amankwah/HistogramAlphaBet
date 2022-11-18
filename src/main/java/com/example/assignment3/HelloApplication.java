@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
     final int CANVASWIDTH = 1080;
     final int CANVASHEIGHT = 720;
     final int linewidth = 5;
-    static String fileName = "/Users/yawamankwah/Desktop/FALL2022/CSC221/Assignment3/src/main/resources/warandpeace.txt";
+    public String fileName = "/Users/yawamankwah/Desktop/FALL2022/CSC221/Assignment3/src/main/resources/warandpeace.txt";
     int n;
 
     @Override
@@ -116,4 +116,6 @@ public class HelloApplication extends Application {
         }
         return ans;
     }
+
+
 }
