@@ -28,12 +28,6 @@ public class HistogramAlphaBet {
         setFrequency(createFrequencyMap(str));
         setProbability(createProbabilityMap());
 
-        //check for accuracy
-//        DecimalFormat df = new DecimalFormat("#.##");
-//        System.out.println("total frequency:" + getTotalFrequency());
-//        System.out.println("total prob: " + getTotalProbability());
-//        frequency.entrySet().forEach(entry -> {System.out.println(entry.getKey() + " " + df.format(entry.getValue()));});
-//        probability.entrySet().forEach(entry -> {System.out.println(entry.getKey() + " " + df.format(entry.getValue()));});
     }
 
     //GETTERS
@@ -152,19 +146,42 @@ public class HistogramAlphaBet {
         }
 
         public Map<Character, Slice> getMyPieChart() {
-            MyColor [] colors = MyColor.values();
-
-            Random rand = new Random();
-            int colorsSize = colors.length;
+            //CREATE COLOR ARRAYLIST WITHOUT GRAY
+            ArrayList<MyColor> colors = new ArrayList<>();
+            for (MyColor color: MyColor.values()) {
+                if (color != MyColor.GRAY) {
+                    colors.add(color);
+                }
+            }
+            //RANDOMIZE THE COLORS
+            Collections.shuffle(colors);
+            int i = 0;
 
             double startAngle = rotateAngle;
             Map<Character, Slice> sorted = new LinkedHashMap<>();
             for (Character Key : probability.keySet()) {
                 double angle = 360.0 * probability.get(Key);
-                sorted.put(Key, new Slice(center, radius, startAngle, angle, colors[rand.nextInt(colorsSize)]));
+                sorted.put(Key, new Slice(center, radius, startAngle, angle, colors.get(i)));
                 startAngle += angle;
+                i++;
             }
             return sorted;
+
+
+
+//            MyColor [] colors = MyColor.values();
+//
+//            Random rand = new Random();
+//            int colorsSize = colors.length;
+//
+//            double startAngle = rotateAngle;
+//            Map<Character, Slice> sorted = new LinkedHashMap<>();
+//            for (Character Key : probability.keySet()) {
+//                double angle = 360.0 * probability.get(Key);
+//                sorted.put(Key, new Slice(center, radius, startAngle, angle, colors[rand.nextInt(colorsSize)]));
+//                startAngle += angle;
+//            }
+//            return sorted;
         }
 
         public Map<Character, Slice> getSlices() {

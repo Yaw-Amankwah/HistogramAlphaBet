@@ -56,8 +56,10 @@ public class Slice {
    //METHODS
     @Override
    public String toString() {
-       return "center: " + slice.getOval().getCenter().toString() + " radius: " + slice.getOval().getRadiusX()
-               + " extent: " + slice.getExtent();
+       return "Slice with center: " + this.getCenter() +
+               " radius: " + this.getRadius() +
+                " starting angle: " + (int) startAngle +
+                " ending angle: " + (int) (startAngle + extent);
     }
    public void draw (GraphicsContext gc) {
        slice.draw(gc);
