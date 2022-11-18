@@ -15,11 +15,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class HelloApplication extends Application {
     final int CANVASWIDTH = 1080;
