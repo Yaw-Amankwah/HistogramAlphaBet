@@ -22,12 +22,12 @@ public class HelloApplication extends Application {
     final int CANVASHEIGHT = 720;
     final int linewidth = 5;
     static String fileName = "/Users/yawamankwah/Desktop/FALL2022/CSC221/Assignment3/src/main/resources/warandpeace.txt";
-    static int n;
+    int n;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         //TEXT INPUT DIALOG
-        textInputDialog();
+        n = textInputDialog("Make your choice");
 
         int padding = 100;
         DecimalFormat df = new DecimalFormat("#.##");
@@ -95,28 +95,25 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-    public void textInputDialog() {
-        n = 0;
+    public int textInputDialog(String s) {
+        int ans = 0;
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Make Your Choice");
-        dialog.setHeaderText("Enter number N:");
+        dialog.setTitle(s);
+        dialog.setHeaderText("Enter number N (1-25):");
         dialog.setContentText("N: ");
 
         Optional<String> result = dialog.showAndWait();
 
-        if (result.isPresent()) {// need to perform checks
+        if (result.isPresent()) {//checks
             try {
-                n = Integer.parseInt(dialog.getEditor().getText());
-                if ((n < 1) || (n > 25)) {
-                    System.out.println("N must be between 1 - 25");
-                    System.out.println("Setting N = 3");
-                    n = 3;
+                ans = Integer.parseInt(dialog.getEditor().getText());
+                if ((ans < 1) || (ans > 25)) {
+                    ans = textInputDialog("N must be between 1 - 25");
                 }
             } catch (NumberFormatException numberFormatException) {
-                System.out.println("ERROR: Input must be number!!");
-                System.out.println("Setting n = 3");
-                n = 3;
+                ans = textInputDialog("N must be a number!!");
             }
         }
+        return ans;
     }
 }
