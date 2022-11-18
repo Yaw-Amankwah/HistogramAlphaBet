@@ -88,7 +88,7 @@ public class HelloApplication extends Application {
         p.draw(gc);
 
         pane.getChildren().add(canvas);
-        primaryStage.setTitle("CHARACTER PROBABILITY CHART");
+        primaryStage.setTitle("CHARACTER PROBABILITY CHART, N = " + n);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

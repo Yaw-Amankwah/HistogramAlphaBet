@@ -115,6 +115,7 @@ public class HistogramAlphaBet {
         } catch (NoSuchElementException elementException) {
             System.err.println("Invalid input! Terminating...");
         }
+        if (input != null) {input.close();}
         return new HistogramAlphaBet(result);
     }
 
