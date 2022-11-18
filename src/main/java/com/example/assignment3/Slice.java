@@ -11,7 +11,6 @@ public class Slice {
    private double rStartAngle, rExtent,rEndAngle;
    private MyColor color;
 
-
    Slice(MyPoint center, int radius, double startAngle, double extent, MyColor color) {
       this.center = center;
       this.radius = radius;

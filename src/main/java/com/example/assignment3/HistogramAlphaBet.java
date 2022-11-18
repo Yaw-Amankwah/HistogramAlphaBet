@@ -1,17 +1,22 @@
 package com.example.assignment3;
 
 import javafx.scene.canvas.GraphicsContext;
-
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Optional;
+import java.util.NoSuchElementException;
 
 public class HistogramAlphaBet {
-
-
-    private Map <Character,Integer> frequency = new HashMap<>();
-    private Map <Character,Double> probability = new HashMap<>();
+    private Map<Character,Integer> frequency = new HashMap<>();
+    private Map<Character,Double> probability = new HashMap<>();
 
     HistogramAlphaBet(){};
     HistogramAlphaBet (Map<Character, Integer> f) {
@@ -166,22 +171,6 @@ public class HistogramAlphaBet {
                 i++;
             }
             return sorted;
-
-
-
-//            MyColor [] colors = MyColor.values();
-//
-//            Random rand = new Random();
-//            int colorsSize = colors.length;
-//
-//            double startAngle = rotateAngle;
-//            Map<Character, Slice> sorted = new LinkedHashMap<>();
-//            for (Character Key : probability.keySet()) {
-//                double angle = 360.0 * probability.get(Key);
-//                sorted.put(Key, new Slice(center, radius, startAngle, angle, colors[rand.nextInt(colorsSize)]));
-//                startAngle += angle;
-//            }
-//            return sorted;
         }
 
         public Map<Character, Slice> getSlices() {
@@ -216,7 +205,6 @@ public class HistogramAlphaBet {
                     end_angle = slices.get(Key).getEndAngle();
                     i++;
                 }
-
             }
             if (n < 26) {
                 Slice rest = new Slice(center, radius, end_angle, 360 - sum_angles, MyColor.GRAY);
